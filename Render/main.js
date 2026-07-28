@@ -89,6 +89,7 @@ function initGameRender(data) {
                     globalPiece.black_knight_1 = square.piece
 
                 }
+
             }
 
             if (square.id == "c8" || square.id == "f8") {
@@ -136,6 +137,7 @@ function initGameRender(data) {
         } else {
           globalPiece.white_rook_1 = square.piece
         }
+
       }
 
       if (square.id == "b1" || square.id == "g1") {
@@ -145,6 +147,7 @@ function initGameRender(data) {
         } else {
           globalPiece.white_knight_1 = square.piece
         }
+
       }
 
       if (square.id == "c1" || square.id == "f1") {
@@ -154,6 +157,7 @@ function initGameRender(data) {
         } else {
           globalPiece.white_bishop_1 = square.piece
         }
+
       }
 
       rowEl.appendChild(squareDiv);
@@ -186,6 +190,7 @@ function clearHightlight() {
 
     globalStateRender();
   });
+
 }
 
 export {
