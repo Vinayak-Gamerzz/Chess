@@ -1,7 +1,6 @@
 import { globalState } from "../index.js";
 import { keySquareMapper } from "../index.js";
 
-
 function checkPieceOfOpponentOnElement(id, color) {
   const opponentColor = color === "white" ? "BLACK" : "WHITE";
 
@@ -14,13 +13,10 @@ function checkPieceOfOpponentOnElement(id, color) {
     el.classList.add("captureColor");
     element.captureHighlight = true;
     return true;
-
   }
 
   return false;
-
 }
-
 
 function checkPieceOfOpponentOnElementNoDom(id, color) {
   const opponentColor = color === "white" ? "BLACK" : "WHITE";
@@ -31,11 +27,9 @@ function checkPieceOfOpponentOnElementNoDom(id, color) {
 
   if (element.piece && element.piece.piece_name.includes(opponentColor)) {
     return true;
-
   }
 
   return false;
-
 }
 
 
@@ -44,10 +38,8 @@ function checkWeatherPieceExistsOrNot(squareId) {
 
   if (square.piece) {
     return square;
-
   } else {
     return false;
-
   }
 }
 
@@ -61,14 +53,11 @@ function checkSquareCaptureId(array) {
 
     if (square.piece) {
       break;
-
     }
     returnArray.push(squareId);
-
   }
 
   return returnArray;
-
 }
 
 
@@ -85,12 +74,11 @@ function giveBishopHighlightIds(id) {
       alpha = String.fromCharCode(alpha.charCodeAt(0) - 1);
       num = num + 1;
       resultArray.push(`${alpha}${num}`);
-
     }
 
     return resultArray;
-
   }
+
 
   function bottomLeft(id) {
     let alpha = id[0];
@@ -101,7 +89,6 @@ function giveBishopHighlightIds(id) {
       alpha = String.fromCharCode(alpha.charCodeAt(0) - 1);
       num = num - 1;
       resultArray.push(`${alpha}${num}`);
-      
     }
 
     return resultArray;
@@ -117,11 +104,9 @@ function giveBishopHighlightIds(id) {
       alpha = String.fromCharCode(alpha.charCodeAt(0) + 1);
       num = num + 1;
       resultArray.push(`${alpha}${num}`);
-
     }
 
     return resultArray;
-
   }
 
 
@@ -134,11 +119,9 @@ function giveBishopHighlightIds(id) {
       alpha = String.fromCharCode(alpha.charCodeAt(0) + 1);
       num = num - 1;
       resultArray.push(`${alpha}${num}`);
-
     }
 
     return resultArray;
-
   }
 
   return {
@@ -146,16 +129,13 @@ function giveBishopHighlightIds(id) {
     bottomLeft: bottomLeft(id),
     topRight: topRight(id),
     bottomRight: bottomRight(id),
-
   };
-
 }
 
 function giveBishopCaptureIds(id, color){
 
   if(!id){
     return [];
-
   }
 
   let hightlightSquareIds = giveBishopHighlightIds(id);
@@ -163,7 +143,6 @@ function giveBishopCaptureIds(id, color){
   let temp = [];
   const { bottomLeft, topLeft, bottomRight, topRight } = hightlightSquareIds;
   let returnArr = [];
-
 
   temp.push(bottomLeft);
   temp.push(topLeft);
@@ -181,20 +160,15 @@ function giveBishopCaptureIds(id, color){
         checkPieceResult &&
         checkPieceResult.piece &&
         checkPieceResult.piece.piece_name.toLowerCase().includes(color)
-
       ) {
         break;
-
       }
 
       if (checkPieceOfOpponentOnElementNoDom(element, color)) {
         returnArr.push(element)
         break;
-
       }
-
     }
-
   }
 
  
@@ -205,10 +179,8 @@ function giveBishopCaptureIds(id, color){
 function giveRookCapturesIds(id,color){
 
   if(!id)
-
   {
     return [];
-
   }
 
   let hightlightSquareIds = giveRookHighlightIds(id);
@@ -216,6 +188,7 @@ function giveRookCapturesIds(id,color){
   let temp = [];
   const { bottom, top, right, left } = hightlightSquareIds;
   let returnArr = [];
+
 
   temp.push(bottom);
   temp.push(top);
@@ -233,24 +206,18 @@ function giveRookCapturesIds(id,color){
         checkPieceResult &&
         checkPieceResult.piece &&
         checkPieceResult.piece.piece_name.toLowerCase().includes(color)
-
       ) {
         break;
-
       }
 
       if (checkPieceOfOpponentOnElementNoDom(element, color)) {
         returnArr.push(element)
         break;
-
       }
-
     }
-
   }
 
   return returnArr;
-
 
 }
 
@@ -262,7 +229,6 @@ function giveQueenCapturesIds(id,color){
   returnArr.push(giveBishopCaptureIds(id, color))
   returnArr.push(giveRookCapturesIds(id, color))
   return returnArr.flat();
-
 }
 
 
@@ -279,13 +245,10 @@ function giveRookHighlightIds(id) {
 
       num = num + 1;
       resultArray.push(`${alpha}${num}`);
-
     }
 
     return resultArray;
-
   }
-
 
   function bottom(id) {
     let alpha = id[0];
@@ -293,16 +256,12 @@ function giveRookHighlightIds(id) {
     let resultArray = [];
 
     while (num != 1) {
-
       num = num - 1;
       resultArray.push(`${alpha}${num}`);
-
     }
 
     return resultArray;
-
   }
-
 
   function right(id) {
     let alpha = id[0];
@@ -313,12 +272,11 @@ function giveRookHighlightIds(id) {
       alpha = String.fromCharCode(alpha.charCodeAt(0) + 1);
 
       resultArray.push(`${alpha}${num}`);
-
     }
 
     return resultArray;
-
   }
+
 
   function left(id) {
     let alpha = id[0];
@@ -329,11 +287,9 @@ function giveRookHighlightIds(id) {
       alpha = String.fromCharCode(alpha.charCodeAt(0) - 1);
 
       resultArray.push(`${alpha}${num}`);
-
     }
 
     return resultArray;
-
   }
 
   return {
@@ -341,9 +297,7 @@ function giveRookHighlightIds(id) {
     bottom: bottom(id),
     right: right(id),
     left: left(id),
-
   };
-
 }
 
 
@@ -351,7 +305,6 @@ function giveKnightHighlightIds(id) {
 
   if (!id) {
     return;
-
   }
 
   function left() {
@@ -364,13 +317,11 @@ function giveKnightHighlightIds(id) {
     while (alpha != "a") {
       if (temp == 2) {
         break;
-
       }
 
       alpha = String.fromCharCode(alpha.charCodeAt(0) - 1);
       resultArray.push(`${alpha}${num}`);
       temp += 1;
-
     }
 
     if (resultArray.length == 2) {
@@ -381,18 +332,14 @@ function giveKnightHighlightIds(id) {
       let number = Number(lastElement[1]);
       if (number < 8) {
         finalReturnArray.push(`${alpha}${number + 1}`);
-
       }
       if (number > 1) {
         finalReturnArray.push(`${alpha}${number - 1}`);
-
       }
       return finalReturnArray
     } else {
       return [];
-
     }
-
   }
 
   function top() {
@@ -408,10 +355,9 @@ function giveKnightHighlightIds(id) {
       }
 
       num = num + 1;
-      
+
       resultArray.push(`${alpha}${num}`);
       temp += 1;
-
     }
 
     if (resultArray.length == 2) {
@@ -423,21 +369,17 @@ function giveKnightHighlightIds(id) {
       if (alpha != "h") {
         let alpha2 = String.fromCharCode(alpha.charCodeAt(0) + 1);
         finalReturnArray.push(`${alpha2}${number}`);
-
       }
       if (alpha != "a") {
         let alpha2 = String.fromCharCode(alpha.charCodeAt(0) - 1);
         finalReturnArray.push(`${alpha2}${number}`);
-
       }
-      
+
 
       return finalReturnArray;
     } else {
       return [];
-
     }
-
   }
 
   function right() {
@@ -450,13 +392,11 @@ function giveKnightHighlightIds(id) {
     while (alpha != "h") {
       if (temp == 2) {
         break;
-
       }
 
       alpha = String.fromCharCode(alpha.charCodeAt(0) + 1);
       resultArray.push(`${alpha}${num}`);
       temp += 1;
-
     }
 
     if (resultArray.length == 2) {
@@ -467,20 +407,16 @@ function giveKnightHighlightIds(id) {
       let number = Number(lastElement[1]);
       if (number < 8) {
         finalReturnArray.push(`${alpha}${number + 1}`);
-
       }
       if (number > 1) {
         finalReturnArray.push(`${alpha}${number - 1}`);
-
       }
-      
+
 
       return finalReturnArray;
     } else {
       return [];
-
     }
-
   }
 
   function bottom() {
@@ -493,14 +429,12 @@ function giveKnightHighlightIds(id) {
     while (num != "1") {
       if (temp == 2) {
         break;
-
       }
 
       num = num - 1;
-      
+
       resultArray.push(`${alpha}${num}`);
       temp += 1;
-
     }
 
     if (resultArray.length == 2) {
@@ -512,25 +446,20 @@ function giveKnightHighlightIds(id) {
       if (alpha != "h") {
         let alpha2 = String.fromCharCode(alpha.charCodeAt(0) + 1);
         finalReturnArray.push(`${alpha2}${number}`);
-
       }
       if (alpha != "a") {
         let alpha2 = String.fromCharCode(alpha.charCodeAt(0) - 1);
         finalReturnArray.push(`${alpha2}${number}`);
-
       }
-      
+
 
       return finalReturnArray;
     } else {
       return [];
-
     }
-
   }
 
   return [...top(), ...bottom(), ...left(), ...right()];
-
 }
 
 
@@ -538,7 +467,6 @@ function giveKnightCaptureIds(id, color) {
 
   if (!id) {
     return [];
-
   }
 
   let returnArr  = giveKnightHighlightIds(id);
@@ -546,13 +474,10 @@ function giveKnightCaptureIds(id, color) {
   returnArr = returnArr.filter(element => {
     if(checkPieceOfOpponentOnElementNoDom(element, color)){
       return true;
-
     }
-
   });
 
   return returnArr;
-
 }
 
 
@@ -568,9 +493,7 @@ function giveQueenHighlightIds(id){
     "topRight": bishopMoves.topRight,
     "bottomLeft" : bishopMoves.bottomLeft,
     "bottomRight" : bishopMoves.bottomRight
-
   }
-
 }
 
 function giveKingHighlightIds(id){
@@ -585,7 +508,6 @@ function giveKingHighlightIds(id){
     "topRight": bishopMoves.topRight,
     "bottomLeft" : bishopMoves.bottomLeft,
     "bottomRight" : bishopMoves.bottomRight
-
   }
 
   for (const key in returnResult) {
@@ -594,23 +516,17 @@ function giveKingHighlightIds(id){
 
       if(element.length != 0){
         returnResult[key] = new Array(element[0]);
-
       }
       
     }
-
   }
 
   return returnResult;
-
 }
-
 function giveKingCaptureIds(id, color){
 
   if(!id) {
-
     return [];
-
   }
 
   let result = giveKingHighlightIds(id);
@@ -618,17 +534,13 @@ function giveKingCaptureIds(id, color){
   result = result.filter(element => {
     if(checkPieceOfOpponentOnElementNoDom(element, color)){
       return true;
-
     }
-
   })
 
   return result;
-
 }
 
 export {
-
   checkPieceOfOpponentOnElement,
   checkSquareCaptureId,
   giveKingCaptureIds,
@@ -642,5 +554,4 @@ export {
   checkWeatherPieceExistsOrNot,
   giveRookCapturesIds,
   giveBishopHighlightIds,
-
 };

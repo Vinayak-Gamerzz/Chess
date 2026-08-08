@@ -9,7 +9,6 @@ import {
   whiteBishop,
 } from "../Data/pieces.js";
 
-// import { blackBishop } from "../Data/pieces.js";
 
 class ModalCreator {
   constructor(body) {
@@ -68,7 +67,6 @@ function pawnPromotion(color, callback, id) {
   const modal = new ModalCreator(finalContainer);
   modal.show();
 
-  // callbacks
   function rookCallback() {
     if (color == "white") {
       callback(whiteRook, id);
