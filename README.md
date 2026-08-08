@@ -20,3 +20,7 @@ check, and checkmate system working on it and will be fixed soon otherwise every
 
 nd yeah
 that's allll!!!
+
+# AI-USEEEE
+
+ so i have used ai for the help to apply logics of chess and for debugging, and tried to create check & checkmate logic but it didn't worked so now i have to see some tutorials for check nd checkmate logic!
